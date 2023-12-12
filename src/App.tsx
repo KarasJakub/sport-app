@@ -1,9 +1,13 @@
 import React from "react"
-import NavigationHeader from "components/Navigation/NavigationHeader"
+import MainLayout from "components/MainLayout"
+import MatchesTable from "components/Tables/MatchesTable/MatchesTable"
 function App() {
   return (
     <>
-      <NavigationHeader />
+      <MainLayout>
+        {/* something */}
+        <MatchesTable />
+      </MainLayout>
     </>
   )
 }
