@@ -1,7 +1,9 @@
+import React from "react"
+import NavigationHeader from "components/Navigation/NavigationHeader"
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">hello</h1>
+      <NavigationHeader />
     </>
   )
 }
