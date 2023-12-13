@@ -1,11 +1,5 @@
 import axios from "axios"
 
-const createAxiosInstance = (baseUrl: string) => {
-  axios.create({
-    baseURL: baseUrl,
-  })
-}
-
-export const apiClient = createAxiosInstance(
-  "https://php74.appgo.pl/sport_api/api/public/api" || ""
-)
+export const apiClient = axios.create({
+  baseURL: "https://php74.appgo.pl/sport_api/api/public/api",
+})
