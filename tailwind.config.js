@@ -5,7 +5,15 @@ export default {
     fontFamily: {
       primary: ["Inter", "sans-serif"],
     },
-    extend: {},
+    colors: {
+      white: "#fff",
+      black: "#000",
+      lightGray: "#FAFAFA",
+      darkGray: "#EAEBED",
+      blue: "#1C336C",
+      orange: "#FC5C17",
+      extend: {},
+    },
+    plugins: [],
   },
-  plugins: [],
 }
