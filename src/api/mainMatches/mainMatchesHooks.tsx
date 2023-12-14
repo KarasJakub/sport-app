@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query"
 import { mainMatchesHandler } from "./mainMatches"
 
-export const useMainMatchesHandler = () => {
+export const useMainMatchesHandler = (pageNumber: number) => {
   return useQuery({
-    queryKey: ["mainMatches"],
-    queryFn: mainMatchesHandler,
+    queryKey: ["mainMatches", pageNumber],
+    queryFn: () => mainMatchesHandler(pageNumber),
   })
 }

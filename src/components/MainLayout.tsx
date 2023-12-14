@@ -8,9 +8,9 @@ interface MainLayoutProps {
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <>
-      <div className="w-full h-screen">
+      <div className="w-full">
         <NavigationHeader />
-        <section className="w-full h-full bg-lightGray flex items-center justify-center">
+        <section className="w-full h-full bg-lightGray flex items-center justify-center pt-8 pb-40">
           {children}
         </section>
       </div>
