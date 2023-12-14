@@ -7,15 +7,36 @@ import { useMainMatchesHandler } from "api/mainMatches/mainMatchesHooks"
 
 const MatchesTable = () => {
   const [currentPage, setCurrentPage] = useState([1, 2, 3])
-  const { data: first } = useMainMatchesHandler(currentPage[0])
-  const { data: second } = useMainMatchesHandler(currentPage[1])
-  const { data: third } = useMainMatchesHandler(currentPage[2])
-  console.log("1", first?.data)
-  console.log("2", second?.data)
+  const {
+    data: firstSetOfData,
+    isSuccess: isFirstRowSuccessfullyFetched,
+    isError: isFirstRowError,
+    isFetching: isFirstRowIsFetching,
+  } = useMainMatchesHandler(currentPage[0])
+  const {
+    data: secondSetOfData,
+    isSuccess: isSecondRowSuccessfullyFetched,
+    isError: isSecondRowError,
+    isFetching: isSecondRowIsFetching,
+  } = useMainMatchesHandler(currentPage[1])
+  const {
+    data: thirdSetOfData,
+    isSuccess: isThirdRowSuccessfullyFetched,
+    isError: isThirdRowError,
+    isFetching: isThirdRowIsFetching,
+  } = useMainMatchesHandler(currentPage[2])
 
   useEffect(() => {
     console.log(currentPage[0], currentPage[1], currentPage[2])
   }, [currentPage])
+
+  const handlePreviousPage = () => {
+    setCurrentPage([currentPage[0] - 3, currentPage[1] - 3, currentPage[2] - 3])
+  }
+
+  const handleNextPage = () => {
+    setCurrentPage([currentPage[0] + 3, currentPage[1] + 3, currentPage[2] + 3])
+  }
 
   return (
     <div className="w-full max-w-6xl">
@@ -40,63 +61,92 @@ const MatchesTable = () => {
           </div>
         </div>
         <div className="p-4 w-full">
-          {/* {isSuccess && ( */}
-          <>
-            <div className="w-full rounded-lg bg-darkGray py-2 px-4">
-              <h3 className="font-primary text-xs font-medium">
-                RUNDA {first?.data[0].round}
-              </h3>
-            </div>
-            {first?.data?.map((match: any) => (
-              <MatchesRowComponent
-                key={match.id}
-                date={match.date}
-                homeTeam={match.home_team_object}
-                awayTeam={match.away_team_object}
-                homeTeamScore={match.home_score}
-                awayTeamScore={match.away_score}
-              />
-            ))}
-          </>
-          {/* )} */}
+          {isFirstRowSuccessfullyFetched && (
+            <>
+              <div className="w-full rounded-lg bg-darkGray py-2 px-4">
+                <h3 className="font-primary text-xs font-medium">
+                  RUNDA {firstSetOfData?.data[0].round}
+                </h3>
+              </div>
+              {firstSetOfData?.data?.map((match: any, index: number) => (
+                <MatchesRowComponent
+                  key={match.id}
+                  date={match.date}
+                  homeTeam={match.home_team_object}
+                  awayTeam={match.away_team_object}
+                  homeTeamScore={match.home_score}
+                  awayTeamScore={match.away_score}
+                  rowNumber={index}
+                />
+              ))}
+            </>
+          )}
+          {isFirstRowError && (
+            <p className="font-primary text-xl font-medium">
+              Nie udało się pobrać danych, skontaktuj sie z administratorem.
+            </p>
+          )}
+          {isFirstRowIsFetching && (
+            <p className="font-primary text-xl font-medium">Ładowanie...</p>
+          )}
 
-          <div className="w-full rounded-lg bg-darkGray py-2 px-4">
-            <h3 className="font-primary text-xs font-medium">
-              RUNDA {second?.data[1].round}
-            </h3>
-          </div>
-          {second?.data?.map((match: any) => (
-            <MatchesRowComponent
-              key={match.id}
-              date={match.date}
-              homeTeam={match.home_team_object}
-              awayTeam={match.away_team_object}
-              homeTeamScore={match.home_score}
-              awayTeamScore={match.away_score}
-            />
-          ))}
+          {isSecondRowSuccessfullyFetched && (
+            <>
+              <div className="w-full rounded-lg bg-darkGray py-2 px-4">
+                <h3 className="font-primary text-xs font-medium">
+                  RUNDA {secondSetOfData?.data[1].round}
+                </h3>
+              </div>
+              {secondSetOfData?.data?.map((match: any, index: number) => (
+                <MatchesRowComponent
+                  key={match.id}
+                  date={match.date}
+                  homeTeam={match.home_team_object}
+                  awayTeam={match.away_team_object}
+                  homeTeamScore={match.home_score}
+                  awayTeamScore={match.away_score}
+                  rowNumber={index}
+                />
+              ))}
+            </>
+          )}
+          {isSecondRowError && (
+            <p className="font-primary text-xl font-medium">
+              Nie udało się pobrać danych, skontaktuj sie z administratorem.
+            </p>
+          )}
+          {isSecondRowIsFetching && (
+            <p className="font-primary text-xl font-medium">Ładowanie...</p>
+          )}
 
-          <div className="w-full rounded-lg bg-darkGray py-2 px-4">
-            <h3 className="font-primary text-xs font-medium">
-              RUNDA {second?.data[1].round}
-            </h3>
-          </div>
-          {third?.data?.map((match: any) => (
-            <MatchesRowComponent
-              key={match.id}
-              date={match.date}
-              homeTeam={match.home_team_object}
-              awayTeam={match.away_team_object}
-              homeTeamScore={match.home_score}
-              awayTeamScore={match.away_score}
-            />
-          ))}
-
-          {/* {isError && (
-      <p className="font-primary text-xl font-medium">
-        Nie udało się pobrać danych, skontaktuj sie z administratorem.
-      </p>
-    )} */}
+          {isThirdRowSuccessfullyFetched && (
+            <>
+              <div className="w-full rounded-lg bg-darkGray py-2 px-4">
+                <h3 className="font-primary text-xs font-medium">
+                  RUNDA {thirdSetOfData?.data[1].round}
+                </h3>
+              </div>
+              {thirdSetOfData?.data?.map((match: any, index: number) => (
+                <MatchesRowComponent
+                  key={match.id}
+                  date={match.date}
+                  homeTeam={match.home_team_object}
+                  awayTeam={match.away_team_object}
+                  homeTeamScore={match.home_score}
+                  awayTeamScore={match.away_score}
+                  rowNumber={index}
+                />
+              ))}
+            </>
+          )}
+          {isThirdRowError && (
+            <p className="font-primary text-xl font-medium">
+              Nie udało się pobrać danych, skontaktuj sie z administratorem.
+            </p>
+          )}
+          {isThirdRowIsFetching && (
+            <p className="font-primary text-xl font-medium">Ładowanie...</p>
+          )}
         </div>
       </div>
       <div className="flex items-center justify-between mt-14">
@@ -104,13 +154,7 @@ const MatchesTable = () => {
           className={`flex items-center justify-items-center gap-2 ${
             currentPage[0] === 1 ? "cursor-not-allowed" : ""
           }`}
-          onClick={() =>
-            setCurrentPage([
-              currentPage[0] - 3,
-              currentPage[1] - 3,
-              currentPage[2] - 3,
-            ])
-          }
+          onClick={() => handlePreviousPage()}
           disabled={currentPage[0] === 1}
         >
           <img src={arrow_icon} alt="Ikona strzałki" />
@@ -122,13 +166,7 @@ const MatchesTable = () => {
           className={`flex flex-row-reverse items-center justify-items-center gap-2 ${
             currentPage[2] === 33 ? "cursor-not-allowed" : ""
           }`}
-          onClick={() =>
-            setCurrentPage([
-              currentPage[0] + 3,
-              currentPage[1] + 3,
-              currentPage[2] + 3,
-            ])
-          }
+          onClick={() => handleNextPage()}
           disabled={currentPage[2] === 33}
         >
           <img src={arrow_icon} alt="Ikona strzałki" className="rotate-180" />

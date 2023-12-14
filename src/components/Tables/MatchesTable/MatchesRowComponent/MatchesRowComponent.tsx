@@ -14,6 +14,7 @@ interface MatchesRowComponentProps {
     name: string
     image: string
   }
+  rowNumber?: number
 }
 
 const MatchesRowComponent = ({
@@ -22,9 +23,14 @@ const MatchesRowComponent = ({
   awayTeam,
   homeTeamScore,
   awayTeamScore,
+  rowNumber,
 }: MatchesRowComponentProps) => {
   return (
-    <div className="w-full p-4 flex justify-between">
+    <div
+      className={`w-full p-4 flex justify-between ${
+        rowNumber === 3 ? "" : "border-b border-[#D5E0E8]"
+      }`}
+    >
       <div className="flex gap-8 items-center">
         <h4 className="font-primary text-base font-normal text-black opacity-50">
           {date}
