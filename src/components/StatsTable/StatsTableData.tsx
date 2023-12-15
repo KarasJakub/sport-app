@@ -1,5 +1,5 @@
-import { createColumnHelper } from "@tanstack/react-table"
 import React from "react"
+import { createColumnHelper } from "@tanstack/react-table"
 export interface MatchesStats {
   team: {
     id: number
@@ -17,40 +17,54 @@ const columnHelper = createColumnHelper<MatchesStats>()
 
 export const columns = [
   columnHelper.accessor("team.id", {
-    header: () => <h3 className="font-primary text-xs font-medium">LP.</h3>,
+    header: () => (
+      <h3 className="font-primary text-xs font-medium text-left">LP.</h3>
+    ),
     cell: (props) => (
-      <p className="font-primary text-xs font-medium">{props.getValue()}</p>
+      <p className="font-primary text-xs font-medium pl-8">
+        {props.getValue()}
+      </p>
     ),
   }),
   columnHelper.accessor("team.name", {
-    header: () => <h3 className="font-primary text-xs font-medium">DRUŻYNA</h3>,
+    header: () => (
+      <h3 className="font-primary text-xs font-medium text-left">DRUŻYNA</h3>
+    ),
     cell: (props) => (
-      <p className="font-primary text-xs font-medium">{props.getValue()}</p>
+      <p className="font-primary text-base font-medium">{props.getValue()}</p>
     ),
   }),
   columnHelper.accessor("games", {
     header: () => <h3 className="font-primary text-xs font-medium">M</h3>,
     cell: (props) => (
-      <p className="font-primary text-xs font-medium">{props.getValue()}</p>
+      <p className="font-primary text-base font-medium text-center">
+        {props.getValue()}
+      </p>
     ),
   }),
   columnHelper.accessor((row) => `${row.goals_scored}:${row.goals_conceded}`, {
     id: "goals",
     header: () => <h3 className="font-primary text-xs font-medium">B</h3>,
-    cell: (info) => (
-      <p className="font-primary text-xs font-medium">{info.getValue()}</p>
+    cell: (props) => (
+      <p className="font-primary text-base font-medium text-center">
+        {props.getValue()}
+      </p>
     ),
   }),
   columnHelper.accessor("goals_ratio", {
     header: () => <h3 className="font-primary text-xs font-medium">RB</h3>,
     cell: (props) => (
-      <p className="font-primary text-xs font-medium">{props.getValue()}</p>
+      <p className="font-primary text-base font-medium text-center">
+        {props.getValue()}
+      </p>
     ),
   }),
   columnHelper.accessor("points", {
     header: () => <h3 className="font-primary text-xs font-medium">P</h3>,
     cell: (props) => (
-      <p className="font-primary text-xs font-medium">{props.getValue()}</p>
+      <p className="font-primary text-base font-bold text-center">
+        {props.getValue()}
+      </p>
     ),
   }),
 ]
