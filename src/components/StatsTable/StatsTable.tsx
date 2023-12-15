@@ -2,13 +2,15 @@ import React from "react"
 import arrow_right_circle from "assets/icons/arrow_right_circle.png"
 import add_icon from "assets/icons/add_icon.png"
 import { useMemo } from "react"
-import { columns, MatchesStats } from "./StatsTableData"
+import { columns, MatchesStatsTypes } from "./StatsTableData"
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 import { useStatsTableHandler } from "api/statsTable/stastTableHooks"
+import ROUTES from "helpers/utils/routes"
+import { Link } from "react-router-dom"
 
 const StatsTable = () => {
   const { data: statsTableData, isError } = useStatsTableHandler()
@@ -18,7 +20,7 @@ const StatsTable = () => {
   const table = useReactTable({
     data,
     columns: columnsMemo,
-    getCoreRowModel: getCoreRowModel<MatchesStats>(),
+    getCoreRowModel: getCoreRowModel<MatchesStatsTypes>(),
   })
   return (
     <div className="w-full max-w-6xl">
@@ -31,10 +33,12 @@ const StatsTable = () => {
                 Anglia: Premier League
               </h1>
             </div>
-            <div className="flex items-center justify-center gap-1">
-              <h2 className="font-primary text-base font-medium">Mecze</h2>
-              <img src={arrow_right_circle} alt="Ikona strzałki" />
-            </div>
+            <Link to={ROUTES.home}>
+              <button className="flex items-center justify-center gap-1">
+                <h2 className="font-primary text-base font-medium">Mecze</h2>
+                <img src={arrow_right_circle} alt="Ikona strzałki" />
+              </button>
+            </Link>
           </div>
         </div>
         <table className="w-full border-spacing-3">
@@ -72,9 +76,13 @@ const StatsTable = () => {
           <tbody className="">
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="m-4 border-b border-[#D5E0E8]">
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell, index) => {
                   return (
-                    <td key={cell.id} className=" py-4">
+                    <td
+                      key={cell.id}
+                      className="p-4"
+                      //   className={`py-4 ${index === 0 ? "" : "md:pl-28"}`}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

@@ -4,6 +4,8 @@ import arrow_right_circle from "assets/icons/arrow_right_circle.png"
 import arrow_icon from "assets/icons/arrow.png"
 import MatchesRowComponent from "./MatchesRowComponent/MatchesRowComponent"
 import { useMainMatchesHandler } from "api/mainMatches/mainMatchesHooks"
+import ROUTES from "helpers/utils/routes"
+import { Link } from "react-router-dom"
 
 const MatchesTable = () => {
   const [currentPage, setCurrentPage] = useState([1, 2, 3])
@@ -54,10 +56,12 @@ const MatchesTable = () => {
                 Anglia: Premier League
               </h1>
             </div>
-            <div className="flex items-center justify-center gap-1">
-              <h2 className="font-primary text-base font-medium">Tabela</h2>
-              <img src={arrow_right_circle} alt="Ikona strzałki" />
-            </div>
+            <Link to={ROUTES.statsTable}>
+              <button className="flex items-center justify-center gap-1">
+                <h2 className="font-primary text-base font-medium">Tabela</h2>
+                <img src={arrow_right_circle} alt="Ikona strzałki" />
+              </button>
+            </Link>
           </div>
         </div>
         <div className="p-4 w-full">
