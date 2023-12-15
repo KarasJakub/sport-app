@@ -40,7 +40,7 @@ const MatchesTable = () => {
 
   return (
     <div className="w-full max-w-6xl">
-      <div className="w-full max-w-6xl bg-white rounded-tl-lg rounded-tr-lg">
+      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
         <div className="p-4 border-b-2 border-[#D5E0E8]">
           <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider">
             Wszystkie
@@ -86,9 +86,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isFirstRowIsFetching && (
+          {/* {isFirstRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
 
           {isSecondRowSuccessfullyFetched && (
             <>
@@ -115,9 +115,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isSecondRowIsFetching && (
+          {/* {isSecondRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
 
           {isThirdRowSuccessfullyFetched && (
             <>
@@ -144,9 +144,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isThirdRowIsFetching && (
+          {/* {isThirdRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
         </div>
       </div>
       <div className="flex items-center justify-between mt-14">
