@@ -4,6 +4,8 @@ import arrow_right_circle from "assets/icons/arrow_right_circle.png"
 import arrow_icon from "assets/icons/arrow.png"
 import MatchesRowComponent from "./MatchesRowComponent/MatchesRowComponent"
 import { useMainMatchesHandler } from "api/mainMatches/mainMatchesHooks"
+import ROUTES from "helpers/utils/routes"
+import { Link } from "react-router-dom"
 
 const MatchesTable = () => {
   const [currentPage, setCurrentPage] = useState([1, 2, 3])
@@ -40,7 +42,7 @@ const MatchesTable = () => {
 
   return (
     <div className="w-full max-w-6xl">
-      <div className="w-full max-w-6xl bg-white rounded-tl-lg rounded-tr-lg">
+      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
         <div className="p-4 border-b-2 border-[#D5E0E8]">
           <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider">
             Wszystkie
@@ -54,10 +56,12 @@ const MatchesTable = () => {
                 Anglia: Premier League
               </h1>
             </div>
-            <div className="flex items-center justify-center gap-1">
-              <h2 className="font-primary text-base font-medium">Tabela</h2>
-              <img src={arrow_right_circle} alt="Ikona strzałki" />
-            </div>
+            <Link to={ROUTES.statsTable}>
+              <button className="flex items-center justify-center gap-1">
+                <h2 className="font-primary text-base font-medium">Tabela</h2>
+                <img src={arrow_right_circle} alt="Ikona strzałki" />
+              </button>
+            </Link>
           </div>
         </div>
         <div className="p-4 w-full">
@@ -86,9 +90,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isFirstRowIsFetching && (
+          {/* {isFirstRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
 
           {isSecondRowSuccessfullyFetched && (
             <>
@@ -115,9 +119,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isSecondRowIsFetching && (
+          {/* {isSecondRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
 
           {isThirdRowSuccessfullyFetched && (
             <>
@@ -144,9 +148,9 @@ const MatchesTable = () => {
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {isThirdRowIsFetching && (
+          {/* {isThirdRowIsFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )}
+          )} */}
         </div>
       </div>
       <div className="flex items-center justify-between mt-14">

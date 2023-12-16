@@ -1,8 +1,11 @@
 import React from "react"
 import MainLayout from "components/MainLayout"
-import MatchesTable from "components/Tables/MatchesTable/MatchesTable"
+import MatchesTable from "components/MatchesTable/MatchesTable"
+import StatsTable from "components/StatsTable/StatsTable"
+import ROUTES from "helpers/utils/routes"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+import { Routes, Route } from "react-router-dom"
 
 const queryClient = new QueryClient()
 function App() {
@@ -11,7 +14,10 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <MainLayout>
-          <MatchesTable />
+          <Routes>
+            <Route path={ROUTES.home} element={<MatchesTable />} />
+            <Route path={ROUTES.statsTable} element={<StatsTable />} />
+          </Routes>
         </MainLayout>
       </QueryClientProvider>
     </>

@@ -62,7 +62,7 @@ const MatchesRowComponent = ({
             {awayTeamScore}
           </p>
         </div>
-        <div className="">
+        <div className="hidden md:block">
           <div className="flex justify-center items-center gap-2">
             <button className="p-3 border-2 border-[#D5E0E8] rounded-lg">
               <img src={monitor_icon} alt="" />
