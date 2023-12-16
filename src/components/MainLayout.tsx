@@ -11,7 +11,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation()
   return (
     <>
-      <div className="w-full">
+      <div className="w-full min-h-screen">
         <NavigationHeader />
         {location.pathname === "/" ? (
           ""
@@ -21,7 +21,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           </div>
         )}
 
-        <section className="w-full h-full bg-lightGray flex items-center justify-center pt-8 pb-40">
+        <section className="w-full min-h-screen bg-lightGray flex items-center justify-center pt-8 pb-40">
           {children}
         </section>
       </div>
