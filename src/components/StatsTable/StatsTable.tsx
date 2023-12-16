@@ -1,6 +1,6 @@
 import React from "react"
-import arrow_right_circle from "assets/icons/arrow_right_circle.png"
-import add_icon from "assets/icons/add_icon.png"
+import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
+import AddIcon from "assets/icons/SVGAdd"
 import { useMemo } from "react"
 import { columns, MatchesStatsTypes } from "./StatsTableData"
 import {
@@ -30,7 +30,7 @@ const StatsTable = () => {
         <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
           <div className="flex justify-between">
             <div className="flex items-center justify-center gap-4">
-              <img src={add_icon} alt="Ikona plusa" />
+              <AddIcon />
               <h1 className="font-primary text-xl font-medium">
                 Anglia: Premier League
               </h1>
@@ -38,7 +38,7 @@ const StatsTable = () => {
             <Link to={ROUTES.home}>
               <button className="flex items-center justify-center gap-1">
                 <h2 className="font-primary text-base font-medium">Mecze</h2>
-                <img src={arrow_right_circle} alt="Ikona strzałki" />
+                <ArrowRightCircleIcon />
               </button>
             </Link>
           </div>

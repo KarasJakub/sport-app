@@ -1,6 +1,6 @@
 import React from "react"
-import monitor_icon from "assets/icons/monitor.png"
-import arrow_right_circle from "assets/icons/arrow_right_circle.png"
+import MonitorIcon from "assets/icons/SVGMonitor"
+import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
 
 interface MatchesRowComponentProps {
   date: string
@@ -65,11 +65,11 @@ const MatchesRowComponent = ({
         <div className="hidden md:block">
           <div className="flex justify-center items-center gap-2">
             <button className="p-3 border-2 border-[#D5E0E8] rounded-lg">
-              <img src={monitor_icon} alt="" />
+              <MonitorIcon />
             </button>
             <button className="p-3 border-2 border-[#D5E0E8] rounded-lg flex gap-1 items-center">
               <p className="font-primary text-base font-medium">Szczegóły</p>
-              <img src={arrow_right_circle} alt="Ikona strzałki" />
+              <ArrowRightCircleIcon />
             </button>
           </div>
         </div>

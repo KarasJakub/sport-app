@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import add_icon from "assets/icons/add_icon.png"
-import arrow_right_circle from "assets/icons/arrow_right_circle.png"
-import arrow_icon from "assets/icons/arrow.png"
+import AddIcon from "assets/icons/SVGAdd"
+import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
+import ArrowIcon from "assets/icons/SVGArrow"
 import MatchesRowComponent from "./MatchesRowComponent/MatchesRowComponent"
 import { useMainMatchesHandler } from "api/mainMatches/mainMatchesHooks"
 import ROUTES from "helpers/utils/routes"
@@ -51,7 +51,7 @@ const MatchesTable = () => {
         <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
           <div className="flex justify-between">
             <div className="flex items-center justify-center gap-4">
-              <img src={add_icon} alt="Ikona plusa" />
+              <AddIcon />
               <h1 className="font-primary text-xl font-medium">
                 Anglia: Premier League
               </h1>
@@ -59,7 +59,7 @@ const MatchesTable = () => {
             <Link to={ROUTES.statsTable}>
               <button className="flex items-center justify-center gap-1">
                 <h2 className="font-primary text-base font-medium">Tabela</h2>
-                <img src={arrow_right_circle} alt="Ikona strzałki" />
+                <ArrowRightCircleIcon />
               </button>
             </Link>
           </div>
@@ -161,7 +161,7 @@ const MatchesTable = () => {
           onClick={() => handlePreviousPage()}
           disabled={currentPage[0] === 1}
         >
-          <img src={arrow_icon} alt="Ikona strzałki" />
+          <ArrowIcon />
           <p className="font-primary text-lg font-medium text-black opacity-50">
             Wstecz
           </p>
@@ -173,7 +173,7 @@ const MatchesTable = () => {
           onClick={() => handleNextPage()}
           disabled={currentPage[2] === 33}
         >
-          <img src={arrow_icon} alt="Ikona strzałki" className="rotate-180" />
+          <ArrowIcon />
           <p className="font-primary text-lg font-medium text-black opacity-50">
             Dalej
           </p>
