@@ -9,6 +9,8 @@ import { Link } from "react-router-dom"
 
 const MatchesTable = () => {
   const [currentPage, setCurrentPage] = useState([1, 2, 3])
+  const [isErrored, setIsErrored] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
   const {
     data: firstSetOfData,
     isSuccess: isFirstRowSuccessfullyFetched,
@@ -31,6 +33,22 @@ const MatchesTable = () => {
   useEffect(() => {
     console.log(currentPage[0], currentPage[1], currentPage[2])
   }, [currentPage])
+
+  useEffect(() => {
+    if (isFirstRowError || isSecondRowError || isThirdRowError) {
+      setIsErrored(true)
+    } else {
+      setIsErrored(false)
+    }
+  }, [isFirstRowError, isSecondRowError, isThirdRowError])
+
+  useEffect(() => {
+    if (isFirstRowIsFetching || isSecondRowIsFetching || isThirdRowIsFetching) {
+      setIsFetching(true)
+    } else {
+      setIsFetching(false)
+    }
+  }, [isFirstRowIsFetching, isSecondRowIsFetching, isThirdRowIsFetching])
 
   const handlePreviousPage = () => {
     setCurrentPage([currentPage[0] - 3, currentPage[1] - 3, currentPage[2] - 3])
@@ -85,15 +103,14 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isFirstRowError && (
+          {isErrored && (
             <p className="font-primary text-xl font-medium">
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {/* {isFirstRowIsFetching && (
+          {isFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
-
+          )}
           {isSecondRowSuccessfullyFetched && (
             <>
               <div className="w-full rounded-lg bg-darkGray py-2 px-4">
@@ -114,15 +131,6 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isSecondRowError && (
-            <p className="font-primary text-xl font-medium">
-              Nie udało się pobrać danych, skontaktuj sie z administratorem.
-            </p>
-          )}
-          {/* {isSecondRowIsFetching && (
-            <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
-
           {isThirdRowSuccessfullyFetched && (
             <>
               <div className="w-full rounded-lg bg-darkGray py-2 px-4">
@@ -143,14 +151,6 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isThirdRowError && (
-            <p className="font-primary text-xl font-medium">
-              Nie udało się pobrać danych, skontaktuj sie z administratorem.
-            </p>
-          )}
-          {/* {isThirdRowIsFetching && (
-            <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
         </div>
       </div>
       <div className="flex items-center justify-between mt-14">
@@ -173,7 +173,7 @@ const MatchesTable = () => {
           onClick={() => handleNextPage()}
           disabled={currentPage[2] === 33}
         >
-          <ArrowIcon />
+          <ArrowIcon style={{ transform: "rotate(180deg)" }} />
           <p className="font-primary text-lg font-medium text-black opacity-50">
             Dalej
           </p>

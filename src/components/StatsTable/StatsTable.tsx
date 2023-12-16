@@ -14,7 +14,12 @@ import ROUTES from "helpers/utils/routes"
 import { Link } from "react-router-dom"
 
 const StatsTable = () => {
-  const { data: statsTableData, isSuccess, isError } = useStatsTableHandler()
+  const {
+    data: statsTableData,
+    isSuccess,
+    isError,
+    isFetching,
+  } = useStatsTableHandler()
   const data = statsTableData || []
   const columnsMemo = useMemo(() => columns, [])
 
@@ -51,7 +56,6 @@ const StatsTable = () => {
                   {headerGroup.headers.map((header, index) => {
                     const isFirst = index === 0
                     const isLast = index === headerGroup.headers.length - 1
-
                     return (
                       <th
                         className={`font-primary text-base font-medium text-black pt-4 pb-4 cursor-pointer ${
@@ -107,6 +111,9 @@ const StatsTable = () => {
           <p className="font-primary text-xl font-medium p-4">
             Nie udało się pobrać danych, skontaktuj sie z administratorem.
           </p>
+        )}
+        {isFetching && (
+          <p className="font-primary text-xl font-medium p-4">Ładowanie...</p>
         )}
         <div className="py-4 pl-8 flex flex-col gap-2">
           <div className="flex gap-2">
