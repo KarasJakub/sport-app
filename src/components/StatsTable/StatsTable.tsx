@@ -1,8 +1,9 @@
 import React from "react"
-import arrow_right_circle from "assets/icons/arrow_right_circle.png"
-import add_icon from "assets/icons/add_icon.png"
+import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
+import AddIcon from "assets/icons/SVGAdd"
 import { useMemo } from "react"
-import { columns, MatchesStatsTypes } from "./StatsTableData"
+import { columns } from "./StatsTableData"
+import { MatchesStatsTypes } from "api/statsTable/statsTableTypes"
 import {
   flexRender,
   getCoreRowModel,
@@ -14,8 +15,13 @@ import ROUTES from "helpers/utils/routes"
 import { Link } from "react-router-dom"
 
 const StatsTable = () => {
-  const { data: statsTableData, isSuccess, isError } = useStatsTableHandler()
-  const data = statsTableData || []
+  const {
+    data: statsTableData,
+    isSuccess,
+    isError,
+    isFetching,
+  } = useStatsTableHandler()
+  const data = Array.isArray(statsTableData) ? statsTableData : []
   const columnsMemo = useMemo(() => columns, [])
 
   const table = useReactTable({
@@ -26,11 +32,11 @@ const StatsTable = () => {
   })
   return (
     <div className="w-full max-w-6xl">
-      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
-        <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
-          <div className="flex justify-between">
+      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg  overflow-x-scroll lg:overflow-x-hidden">
+        <div className="p-4 bg-white border-b-2 border-borderGray rounded-tl-2xl rounded-tr-2xl">
+          <div className="flex justify-between ">
             <div className="flex items-center justify-center gap-4">
-              <img src={add_icon} alt="Ikona plusa" />
+              <AddIcon />
               <h1 className="font-primary text-xl font-medium">
                 Anglia: Premier League
               </h1>
@@ -38,7 +44,7 @@ const StatsTable = () => {
             <Link to={ROUTES.home}>
               <button className="flex items-center justify-center gap-1">
                 <h2 className="font-primary text-base font-medium">Mecze</h2>
-                <img src={arrow_right_circle} alt="Ikona strzałki" />
+                <ArrowRightCircleIcon />
               </button>
             </Link>
           </div>
@@ -51,7 +57,6 @@ const StatsTable = () => {
                   {headerGroup.headers.map((header, index) => {
                     const isFirst = index === 0
                     const isLast = index === headerGroup.headers.length - 1
-
                     return (
                       <th
                         className={`font-primary text-base font-medium text-black pt-4 pb-4 cursor-pointer ${
@@ -82,7 +87,7 @@ const StatsTable = () => {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="m-4 border-b border-[#D5E0E8]">
+                <tr key={row.id} className="m-4 border-b border-borderGray">
                   {row.getVisibleCells().map((cell, index) => {
                     return (
                       <td
@@ -107,6 +112,9 @@ const StatsTable = () => {
           <p className="font-primary text-xl font-medium p-4">
             Nie udało się pobrać danych, skontaktuj sie z administratorem.
           </p>
+        )}
+        {isFetching && (
+          <p className="font-primary text-xl font-medium p-4">Ładowanie...</p>
         )}
         <div className="py-4 pl-8 flex flex-col gap-2">
           <div className="flex gap-2">

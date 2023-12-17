@@ -10,22 +10,20 @@ interface MainLayoutProps {
 const MainLayout = ({ children }: MainLayoutProps) => {
   const location = useLocation()
   return (
-    <>
-      <div className="w-full min-h-screen">
-        <NavigationHeader />
-        {location.pathname === "/" ? (
-          ""
-        ) : (
-          <div className="w-full ">
-            <BreadCrumbs />
-          </div>
-        )}
+    <div className="w-full min-h-screen">
+      <NavigationHeader />
+      {location.pathname === "/" ? (
+        ""
+      ) : (
+        <div className="w-full ">
+          <BreadCrumbs />
+        </div>
+      )}
 
-        <section className="w-full min-h-screen bg-lightGray flex items-center justify-center pt-8 pb-40">
-          {children}
-        </section>
-      </div>
-    </>
+      <section className="w-full min-h-screen bg-lightGray flex items-center justify-center pt-8 pb-40">
+        {children}
+      </section>
+    </div>
   )
 }
 
