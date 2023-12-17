@@ -2,7 +2,8 @@ import React from "react"
 import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
 import AddIcon from "assets/icons/SVGAdd"
 import { useMemo } from "react"
-import { columns, MatchesStatsTypes } from "./StatsTableData"
+import { columns } from "./StatsTableData"
+import { MatchesStatsTypes } from "api/statsTable/statsTableTypes"
 import {
   flexRender,
   getCoreRowModel,
@@ -20,7 +21,7 @@ const StatsTable = () => {
     isError,
     isFetching,
   } = useStatsTableHandler()
-  const data = statsTableData || []
+  const data = Array.isArray(statsTableData) ? statsTableData : []
   const columnsMemo = useMemo(() => columns, [])
 
   const table = useReactTable({

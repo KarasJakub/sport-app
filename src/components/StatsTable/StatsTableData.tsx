@@ -1,17 +1,6 @@
 import React from "react"
 import { createColumnHelper } from "@tanstack/react-table"
-export interface MatchesStatsTypes {
-  team: {
-    id: number
-    name: string
-    image: string
-  }
-  points: number
-  goals_scored: number
-  goals_conceded: number
-  goals_ratio: number
-  games: number
-}
+import { MatchesStatsTypes } from "api/statsTable/statsTableTypes"
 
 const columnHelper = createColumnHelper<MatchesStatsTypes>()
 
