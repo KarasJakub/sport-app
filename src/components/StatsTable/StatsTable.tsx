@@ -32,9 +32,9 @@ const StatsTable = () => {
   })
   return (
     <div className="w-full max-w-6xl">
-      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
-        <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
-          <div className="flex justify-between">
+      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg  overflow-x-scroll lg:overflow-x-hidden">
+        <div className="p-4 bg-white border-b-2 border-borderGray rounded-tl-2xl rounded-tr-2xl">
+          <div className="flex justify-between ">
             <div className="flex items-center justify-center gap-4">
               <AddIcon />
               <h1 className="font-primary text-xl font-medium">
@@ -87,7 +87,7 @@ const StatsTable = () => {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="m-4 border-b border-[#D5E0E8]">
+                <tr key={row.id} className="m-4 border-b border-borderGray">
                   {row.getVisibleCells().map((cell, index) => {
                     return (
                       <td

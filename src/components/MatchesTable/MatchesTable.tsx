@@ -31,10 +31,6 @@ const MatchesTable = () => {
   } = useMainMatchesHandler(currentPage[2])
 
   useEffect(() => {
-    console.log(currentPage[0], currentPage[1], currentPage[2])
-  }, [currentPage])
-
-  useEffect(() => {
     if (isFirstRowError || isSecondRowError || isThirdRowError) {
       setIsErrored(true)
     } else {
@@ -61,12 +57,12 @@ const MatchesTable = () => {
   return (
     <div className="w-full max-w-6xl">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
-        <div className="p-4 border-b-2 border-[#D5E0E8]">
-          <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider">
+        <div className="p-4 border-b-2 border-borderGray">
+          <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider hover:bg-[#132047]">
             Wszystkie
           </button>
         </div>
-        <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
+        <div className="p-4 bg-white border-b-2 border-borderGray">
           <div className="flex justify-between">
             <div className="flex items-center justify-center gap-4">
               <AddIcon />

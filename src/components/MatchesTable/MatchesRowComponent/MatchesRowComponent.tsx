@@ -1,6 +1,8 @@
 import React from "react"
 import MonitorIcon from "assets/icons/SVGMonitor"
 import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
+import { Link } from "react-router-dom"
+import ROUTES from "helpers/utils/routes"
 
 interface MatchesRowComponentProps {
   date: string
@@ -28,7 +30,7 @@ const MatchesRowComponent = ({
   return (
     <div
       className={`w-full p-4 flex justify-between ${
-        rowNumber === 3 ? "" : "border-b border-[#D5E0E8]"
+        rowNumber === 3 ? "" : "border-b border-borderGray"
       }`}
     >
       <div className="flex gap-8 items-center">
@@ -64,13 +66,19 @@ const MatchesRowComponent = ({
         </div>
         <div className="hidden md:block">
           <div className="flex justify-center items-center gap-2">
-            <button className="p-3 border-2 border-[#D5E0E8] rounded-lg">
+            <Link
+              to={ROUTES.home}
+              className="p-3 border-2 border-borderGray rounded-lg transition-colors duration-300 hover:bg-borderGray cursor-pointer"
+            >
               <MonitorIcon />
-            </button>
-            <button className="p-3 border-2 border-[#D5E0E8] rounded-lg flex gap-1 items-center">
+            </Link>
+            <Link
+              to={ROUTES.home}
+              className="p-3 border-2 border-borderGray rounded-lg flex gap-1 items-center transition-colors duration-300 hover:bg-borderGray cursor-pointer"
+            >
               <p className="font-primary text-base font-medium">Szczegóły</p>
               <ArrowRightCircleIcon />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
