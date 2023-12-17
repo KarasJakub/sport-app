@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import add_icon from "assets/icons/add_icon.png"
-import arrow_right_circle from "assets/icons/arrow_right_circle.png"
-import arrow_icon from "assets/icons/arrow.png"
+import AddIcon from "assets/icons/SVGAdd"
+import ArrowRightCircleIcon from "assets/icons/SVGArrowRightCircle"
+import ArrowIcon from "assets/icons/SVGArrow"
 import MatchesRowComponent from "./MatchesRowComponent/MatchesRowComponent"
 import { useMainMatchesHandler } from "api/mainMatches/mainMatchesHooks"
 import ROUTES from "helpers/utils/routes"
@@ -9,6 +9,8 @@ import { Link } from "react-router-dom"
 
 const MatchesTable = () => {
   const [currentPage, setCurrentPage] = useState([1, 2, 3])
+  const [isErrored, setIsErrored] = useState(false)
+  const [isFetching, setIsFetching] = useState(false)
   const {
     data: firstSetOfData,
     isSuccess: isFirstRowSuccessfullyFetched,
@@ -29,8 +31,20 @@ const MatchesTable = () => {
   } = useMainMatchesHandler(currentPage[2])
 
   useEffect(() => {
-    console.log(currentPage[0], currentPage[1], currentPage[2])
-  }, [currentPage])
+    if (isFirstRowError || isSecondRowError || isThirdRowError) {
+      setIsErrored(true)
+    } else {
+      setIsErrored(false)
+    }
+  }, [isFirstRowError, isSecondRowError, isThirdRowError])
+
+  useEffect(() => {
+    if (isFirstRowIsFetching || isSecondRowIsFetching || isThirdRowIsFetching) {
+      setIsFetching(true)
+    } else {
+      setIsFetching(false)
+    }
+  }, [isFirstRowIsFetching, isSecondRowIsFetching, isThirdRowIsFetching])
 
   const handlePreviousPage = () => {
     setCurrentPage([currentPage[0] - 3, currentPage[1] - 3, currentPage[2] - 3])
@@ -43,15 +57,15 @@ const MatchesTable = () => {
   return (
     <div className="w-full max-w-6xl">
       <div className="w-full max-w-6xl bg-white rounded-2xl shadow-lg">
-        <div className="p-4 border-b-2 border-[#D5E0E8]">
-          <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider">
+        <div className="p-4 border-b-2 border-borderGray">
+          <button className="bg-blue py-4 px-5 font-primary text-white rounded-lg tracking-wider hover:bg-[#132047]">
             Wszystkie
           </button>
         </div>
-        <div className="p-4 bg-white border-b-2 border-[#D5E0E8]">
+        <div className="p-4 bg-white border-b-2 border-borderGray">
           <div className="flex justify-between">
             <div className="flex items-center justify-center gap-4">
-              <img src={add_icon} alt="Ikona plusa" />
+              <AddIcon />
               <h1 className="font-primary text-xl font-medium">
                 Anglia: Premier League
               </h1>
@@ -59,7 +73,7 @@ const MatchesTable = () => {
             <Link to={ROUTES.statsTable}>
               <button className="flex items-center justify-center gap-1">
                 <h2 className="font-primary text-base font-medium">Tabela</h2>
-                <img src={arrow_right_circle} alt="Ikona strzałki" />
+                <ArrowRightCircleIcon />
               </button>
             </Link>
           </div>
@@ -85,15 +99,14 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isFirstRowError && (
+          {isErrored && (
             <p className="font-primary text-xl font-medium">
               Nie udało się pobrać danych, skontaktuj sie z administratorem.
             </p>
           )}
-          {/* {isFirstRowIsFetching && (
+          {isFetching && (
             <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
-
+          )}
           {isSecondRowSuccessfullyFetched && (
             <>
               <div className="w-full rounded-lg bg-darkGray py-2 px-4">
@@ -114,15 +127,6 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isSecondRowError && (
-            <p className="font-primary text-xl font-medium">
-              Nie udało się pobrać danych, skontaktuj sie z administratorem.
-            </p>
-          )}
-          {/* {isSecondRowIsFetching && (
-            <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
-
           {isThirdRowSuccessfullyFetched && (
             <>
               <div className="w-full rounded-lg bg-darkGray py-2 px-4">
@@ -143,14 +147,6 @@ const MatchesTable = () => {
               ))}
             </>
           )}
-          {isThirdRowError && (
-            <p className="font-primary text-xl font-medium">
-              Nie udało się pobrać danych, skontaktuj sie z administratorem.
-            </p>
-          )}
-          {/* {isThirdRowIsFetching && (
-            <p className="font-primary text-xl font-medium">Ładowanie...</p>
-          )} */}
         </div>
       </div>
       <div className="flex items-center justify-between mt-14">
@@ -161,7 +157,7 @@ const MatchesTable = () => {
           onClick={() => handlePreviousPage()}
           disabled={currentPage[0] === 1}
         >
-          <img src={arrow_icon} alt="Ikona strzałki" />
+          <ArrowIcon />
           <p className="font-primary text-lg font-medium text-black opacity-50">
             Wstecz
           </p>
@@ -173,7 +169,7 @@ const MatchesTable = () => {
           onClick={() => handleNextPage()}
           disabled={currentPage[2] === 33}
         >
-          <img src={arrow_icon} alt="Ikona strzałki" className="rotate-180" />
+          <ArrowIcon style={{ transform: "rotate(180deg)" }} />
           <p className="font-primary text-lg font-medium text-black opacity-50">
             Dalej
           </p>
